@@ -1,0 +1,1 @@
+streamlit>=1.36\nPyMuPDF>=1.24\nsentence-transformers>=3.0\nscikit-learn>=1.5\nnumpy>=1.26\npandas>=2.2\npython-dotenv>=1.0\nopenai>=1.40\nreportlab>=4.2\n
