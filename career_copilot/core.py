@@ -36,20 +36,20 @@ SKILL_SYNONYMS = {
 
 def normalize_text(text: str) -> str:
     text = text.replace("\x00", " ")
-    text = re.sub(r"[ \\t]+", " ", text)
-    text = re.sub(r"\\n{3,}", "\\n\\n", text)
+    text = re.sub(r"[ \t]+", " ", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
 
 def extract_pdf_text(uploaded_file) -> str:
     try:
         import fitz
         document = fitz.open(stream=uploaded_file.getvalue(), filetype="pdf")
-        return normalize_text("\\n".join(page.get_text("text") for page in document))
+        return normalize_text("\n".join(page.get_text("text") for page in document))
     except Exception as exc:
         raise ValueError(f"Could not read this PDF: {exc}") from exc
 
 def _canonical_skill_mentions(text: str) -> Dict[str, str]:
-    low = re.sub(r"\\s+", " ", text.lower())
+    low = re.sub(r"\s+", " ", text.lower())
     found = {}
     for canonical, aliases in SKILL_SYNONYMS.items():
         for term in [canonical] + aliases:
@@ -68,6 +68,7 @@ def compare_skills(resume_text: str, job_text: str) -> Tuple[List[str], List[str
     return [s for s in required if s in resume], [s for s in required if s not in resume]
 
 def semantic_similarity(resume_text: str, job_text: str) -> Tuple[float, str]:
+    """Return cosine similarity as 0-100. SentenceTransformers preferred; TF-IDF fallback."""
     if not resume_text.strip() or not job_text.strip():
         raise ValueError("Resume and job description must both contain readable text.")
     try:
