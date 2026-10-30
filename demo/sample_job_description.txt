@@ -1,0 +1,15 @@
+Machine Learning Intern
+
+Responsibilities:
+- Develop and evaluate machine learning models.
+- Clean, analyse and visualize structured datasets.
+- Work with Python, SQL, pandas, NumPy and scikit-learn.
+- Understand deep learning and natural language processing fundamentals.
+- Collaborate using Git and communicate findings clearly.
+
+Requirements:
+- Python programming and problem solving.
+- Machine learning, data analysis and SQL.
+- Familiarity with TensorFlow or PyTorch is an advantage.
+- Knowledge of NLP and large language models is desirable.
+- Good communication and teamwork.
